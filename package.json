@@ -9,7 +9,7 @@
   "dependencies": {
     "cross-env": "^7.0.2",
     "express": "^4.17.1",
-    "next": "latest",
+    "next": "^10.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "socket.io": "^3.0.5",
