@@ -1,0 +1,642 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Work sans', -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Icons16", sans-serif;
+}
+
+body {
+    font-size: 14px;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+.Chat {
+    width: 100%;
+    height: 100vh;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.Chat .Sidebar {
+    max-width: 320px;
+    min-width: 320px;
+    background-color: #333;
+    height: 100%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .8);
+    display: flex;
+    z-index: 1;
+    flex-direction: column;
+    transition: all .2s ease-in-out;
+}
+
+.ChatArea {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.ChatArea .activeChat {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.Chat .Heading {
+    height: 70px;
+    background-color: #333;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+    display: flex;
+    align-items: center;
+}
+
+.Chat .Input {
+    height: 78px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    display: flex;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+}
+
+.Chat .Input .option {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #f3f3f3;
+}
+
+.Chat .Input .option button {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.Chat .Input .option button:hover {
+    background-color: rgba(0, 0, 0, .1);
+}
+
+.Chat .Input .option label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.Chat .Input #attach-file {
+    position: absolute;
+    z-index: -1;
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+.Chat .Input .textarea {
+    flex: 1;
+    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.Chat .Input .textarea textarea {
+    width: 100%;
+    border: 0;
+    font-size: 1em;
+    outline: none;
+    color: #004c7c;
+    resize: none;
+    /*padding: 50px 0;*/
+}
+
+.Chat .Input .send {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid #eee;
+}
+
+.Chat .Input .send button {
+    border: 0;
+    padding: .8em 2em;
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+    color: rgba(0, 59, 96, 0.85);
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, .03);
+}
+
+.Chat .Input div:last-child button:hover {
+    background-color: transparent;
+}
+
+.Chat .Sidebar .top {
+    flex: 0 0 70px;
+}
+
+.Chat .Sidebar .middle {
+    flex: 1;
+}
+
+.Chat .Sidebar .middle .menu {
+    display: flex;
+    justify-content: space-around;
+}
+
+.Chat .Sidebar .middle .menu-item {
+    padding: .5em;
+    text-align: center;
+    color: #999;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    position: relative;
+}
+
+.Chat .Sidebar .middle .menu-item:hover {
+    color: #aaa;
+}
+
+.Chat .Sidebar .middle .menu-item.active {
+    color: #ccc;
+    border-bottom: 2px solid #004c7c;
+}
+
+.Chat .Sidebar .bottom {
+    flex: 0 0 78px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    background-color: #222;
+    border-top: 1px solid #1c1c1c;
+    box-shadow: 0 -10px 10px -10px rgba(0, 0, 0, .3);
+}
+
+.Chat .Sidebar .bottom .name {
+    padding-right: 20px;
+}
+
+.Chat .Sidebar .user {
+    flex: 1;
+    display: flex;
+    padding: 0 20px;
+}
+
+.Chat .Sidebar .user .name {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    font-size: 1em;
+    color: #eee;
+    flex: 1;
+}
+
+.Chat .Sidebar .bottom .logout-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Chat .user .avatar {
+    flex: 0 0 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Chat .user .avatar span {
+    width: 40px;
+    height: 40px;
+    background-color: #272727;
+    color: #999;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.Chat .Sidebar .bottom button {
+    border: 0;
+    border-radius: 3px;
+    padding: 5px 10px;
+    color: #ccc;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    background-color: #853b3b;
+}
+
+.Chat .Sidebar .bottom button:hover {
+    background-color: #2b2b2b;
+}
+
+.Chat .chat {
+    display: flex;
+    height: 90px;
+    padding: 1em;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    position: relative;
+}
+
+.Chat .Sidebar .middle .unread {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #c22b26;
+    font-size: .9em;
+    border-radius: 10px;
+    padding: .2em .6em .3em;
+    color: #fff;
+    animation: message .3s ease-in-out forwards;
+}
+
+.Chat .chat:hover {
+    background-color: rgba(255, 255, 255, .04);
+}
+
+.Chat .chat.active {
+    width: 104%;
+    height: 92px;
+    background-color: rgba(0, 145, 234, 0.94);
+    box-shadow: -15px 30px 20px -15px rgba(0, 0, 0, .1), 0 0 10px rgba(0, 0, 0, .2);
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.Chat .chat.active .content .name {
+    color: #fff;
+}
+
+.Chat .chat.active .content .last-message {
+    color: #eee;
+}
+
+.Chat .chat .avatar {
+    flex: 0 0 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Chat .Sidebar .middle .users {
+    padding: 2em 0;
+}
+
+.Chat .Sidebar .middle .users .user {
+    padding: .5em;
+    cursor: pointer;
+    position: relative;
+}
+
+.Chat .Sidebar .middle .users .user.chatting::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #0091ea;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+}
+
+.Chat .Sidebar .middle .users .user:hover {
+    background-color: rgba(0, 0, 0, .03);
+}
+
+.Chat .chat .avatar span {
+    width: 40px;
+    height: 40px;
+    background-color: #334;
+    color: #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+.Chat .chat.active .avatar span {
+    background-color: #eee;
+    color: #999;
+}
+
+.Chat .chat .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 15px;
+    overflow: hidden;
+}
+
+.Chat .chat .content .name {
+    color: #f8f8f8;
+    margin-bottom: 2px;
+    font-size: 1.1em;
+}
+
+.Chat .chat .content .last-message {
+    font-size: .9em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+.Chat .Messages {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 2em 5em;
+    overflow-y: auto;
+}
+
+.Chat .Messages .message {
+    margin: 6px 0;
+    align-self: flex-start;
+    max-width: 60%;
+    animation: message .3s ease-in-out forwards;
+}
+
+.Chat .Messages .message.user {
+    margin: 4px 0;
+    align-self: flex-end;
+}
+
+.Chat .Messages .message .text {
+    background-color: #fff;
+    padding: 1em 2em;
+    border-radius: 5px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, .1);
+    color: #004c7c;
+    text-align: justify;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.Chat .Messages .message .text .message-content {}
+
+.Chat .Messages .message.user .text {
+    background-color: rgba(0, 163, 255, 0.63);
+    color: #fff;
+}
+
+.Chat .Messages .message .text .message-content img {
+    max-width: 300px;
+    border-radius: 5px;
+}
+
+.Chat .Messages .message.user .text .message-content img {
+    /*border: 3px solid rgba(0, 0, 0, .1);*/
+}
+
+.Chat .Messages .message .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #cccccc;
+    padding: .5em 0 0;
+    font-size: .76em;
+}
+
+.Chat .Messages .message.user .meta {
+    color: rgb(250, 255, 43);
+}
+
+.Chat .Messages .message .name {
+    margin-left: 20px;
+    color: rgba(255, 125, 125, 0.72);
+}
+
+.Chat .Messages .message.info {
+    align-self: center;
+}
+
+.Chat .Messages .message.info .text>* {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.Chat .Messages .message.info .text {
+    justify-self: center !important;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    color: rgba(255, 125, 125, 0.53);
+    box-shadow: none;
+    padding: .5em 1em !important;
+}
+
+.Chat .Messages .message.info .text .meta {
+    margin-left: 10px;
+}
+
+.typing-users {
+    background-color: #fff;
+    padding: 1em 1em .5em;
+    border-radius: 5px;
+    box-shadow: 0 10px 40px -15px rgba(0, 0, 0, .1);
+    color: #004c7c;
+    align-self: flex-start;
+    margin: 10px 0;
+    animation: message .3s ease-in-out forwards;
+}
+
+.typing {
+    display: flex;
+    margin: 4px 0;
+}
+
+.typing .circle {
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 4px;
+    animation: typing 3s ease-in-out forwards infinite;
+}
+
+.typing .circle:first-child {
+    background-color: rgba(0, 156, 249, 0.63);
+}
+
+.typing .circle:nth-child(2) {
+    background-color: rgba(0, 156, 249, 0.4);
+    animation-delay: .2s;
+}
+
+.typing .circle:last-child {
+    background-color: rgba(0, 156, 249, 0.16);
+    animation-delay: .4s;
+}
+
+.typing-users .name {
+    padding: .5em 0 0;
+    color: rgba(255, 125, 125, 0.5);
+}
+
+.Chat .Heading .sidebar-toggle {
+    margin-left: 1em;
+    display: none;
+    position: relative;
+}
+
+.Chat .Heading .sidebar-toggle .unread {
+    position: absolute;
+    top: -3.5px;
+    right: -3.5px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #ff342f;
+    animation: glow 1s ease-in-out alternate forwards infinite;
+}
+
+.Chat .Heading .sidebar-toggle button {
+    padding: .6em;
+    border-radius: 3px;
+    background-color: #282828;
+    border: 0;
+}
+
+.Chat .Heading .active-chat {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.Chat .Heading .active-chat>* {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Chat .Heading .active-chat .avatar {
+    background-color: #222;
+    color: #aaa;
+    font-weight: bold;
+    font-size: 1.2em;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 1em;
+}
+
+.Chat .Heading .active-chat .name {
+    color: #ddd;
+}
+
+.welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    line-height: 2.5em;
+}
+
+.welcome h3 {
+    font-size: 3em;
+    font-weight: bold;
+    color: rgba(0, 76, 124, 0.23);
+}
+
+.welcome p {
+    font-size: 1.3em;
+    color: #aaa;
+}
+
+@media (max-width: 700px) {
+    .Chat .Sidebar {
+        max-width: 0;
+        min-width: 0;
+        overflow: hidden;
+    }
+    .Chat .Sidebar.open {
+        max-width: 300px;
+        min-width: 300px;
+    }
+    .Chat .Heading .sidebar-toggle {
+        display: block;
+    }
+    .Chat .Messages {
+        padding: 1.2em;
+        width: 100%;
+    }
+    .Chat .Messages .message .text {
+        padding: 1em 1em .4em;
+    }
+    .Chat .Messages .message.info .text {
+        padding: .5em 1em !important;
+    }
+}
+
+@keyframes message {
+    0% {
+        opacity: 0;
+        transform: scale(.7);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes glow {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, .1);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+        transform: scale(1.05);
+    }
+}
+
+@keyframes typing {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-5px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+    75% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
